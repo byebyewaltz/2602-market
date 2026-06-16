@@ -12,6 +12,7 @@ export async function addProductToOrder(orderId, productId, quantity) {
   return orderProduct;
 }
 
+
 /** Products belonging to the given order */
 export async function getProductsByOrderId(orderId) {
   const sql = `
