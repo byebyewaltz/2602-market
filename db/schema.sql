@@ -17,3 +17,10 @@ CREATE TABLE orders (
   note text,
   user_id int NOT NULL REFERENCES users (id) ON DELETE CASCADE
 );
+
+CREATE TABLE products (
+  id serial PRIMARY KEY,
+  title text NOT NULL,
+  description text NOT NULL,
+  price decimal NOT NULL
+);
