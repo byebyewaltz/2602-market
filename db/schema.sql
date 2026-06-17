@@ -10,3 +10,10 @@ CREATE TABLE users (
   username text UNIQUE NOT NULL,
   password text NOT NULL
 );
+
+CREATE TABLE orders (
+  id serial PRIMARY KEY,
+  date date NOT NULL,
+  note text,
+  user_id int NOT NULL REFERENCES users (id) ON DELETE CASCADE
+);
