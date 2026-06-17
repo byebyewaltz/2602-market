@@ -45,3 +45,4 @@ export async function getOrdersByUserIdAndProductId(userId, productId) {
   const { rows: orders } = await db.query(sql, [userId, productId]);
   return orders;
 }
+ 
