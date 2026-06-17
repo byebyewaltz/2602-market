@@ -24,3 +24,10 @@ CREATE TABLE products (
   description text NOT NULL,
   price decimal NOT NULL
 );
+
+CREATE TABLE orders_products (
+  order_id int NOT NULL REFERENCES orders (id) ON DELETE CASCADE,
+  product_id int NOT NULL REFERENCES products (id) ON DELETE CASCADE,
+  quantity int NOT NULL,
+  PRIMARY KEY (order_id, product_id)
+);
