@@ -13,7 +13,6 @@ export async function createUser(username, password) {
   } = await db.query(sql, [username, hashed]);
   return user;
 }
-
 export async function getUserByUsernameAndPassword(username, password) {
   const sql = `
     SELECT *
