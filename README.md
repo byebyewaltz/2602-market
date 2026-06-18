@@ -108,3 +108,25 @@ If a valid token is not provided, immediately send a 401 Unauthorized error.
 **Make a pull request** from your fork into the main branch of this starter repo.
 The title of your pull request should include your full name. Submit the link
 to your _pull request_.
+
+## Frontend
+
+A vanilla-JS single-page client lives in `public/` and is served by the Express
+app at `/`. It exercises every route in this API:
+
+- **The shelf** — `GET /products`, with a detail drawer via `GET /products/:id`.
+- **Account** — register and sign in (`POST /users/register`, `POST /users/login`);
+  the JWT is held in memory and attached as a `Bearer` token.
+- **Your ledger** — open orders (`POST /orders`), list them (`GET /orders`), and
+  open any order to see its line items and total (`GET /orders/:id`,
+  `GET /orders/:id/products`).
+- **Add to order** — from a product drawer, add a quantity to one of your orders
+  (`POST /orders/:id/products`); the drawer also shows which of your orders already
+  include that product (`GET /products/:id/orders`).
+
+No build step. Run the server and open the root URL:
+
+```bash
+npm run db:reset
+npm run dev      # then visit http://localhost:3000
+```

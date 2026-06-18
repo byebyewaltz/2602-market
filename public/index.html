@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Market — the ledger</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Spline+Sans+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="grain" aria-hidden="true"></div>
+
+    <header class="masthead">
+      <a class="brand" href="#" data-route="shelf">
+        <span class="brand-mark">※</span>
+        <span class="brand-name">Market</span>
+        <span class="brand-sub">the ledger</span>
+      </a>
+      <nav class="nav">
+        <button class="nav-link" data-route="shelf">The shelf</button>
+        <button class="nav-link" data-route="orders" data-auth>Your ledger</button>
+        <div class="account-slot" id="account-slot"></div>
+      </nav>
+    </header>
+
+    <main id="view" class="view"></main>
+
+    <!-- Product detail drawer -->
+    <aside class="drawer" id="drawer" aria-hidden="true">
+      <div class="drawer-scrim" data-close-drawer></div>
+      <div class="drawer-panel" role="dialog" aria-modal="true" aria-labelledby="drawer-title">
+        <button class="drawer-close" data-close-drawer aria-label="Close">×</button>
+        <div id="drawer-body"></div>
+      </div>
+    </aside>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <footer class="footer">
+      <span>Market</span>
+      <span class="footer-rule"></span>
+      <span>a small shop, honestly kept</span>
+    </footer>
+
+    <script src="/index.js" type="module"></script>
+  </body>
+</html>
