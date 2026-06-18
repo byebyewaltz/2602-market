@@ -1,60 +1,55 @@
-import express from "express";
-const router = express.Router();
-export default router;
+import db from "#db/client";
 
-import requireUser from "#middleware/requireUser";
-import requireBody from "#middleware/requireBody";
-import {
-  createOrder,
-  getOrdersByUserId,
-  getOrderById,
-} from "#db/queries/orders";
-import { getProductById } from "#db/queries/products";
-import {
-  addProductToOrder,
-  getProductsByOrderId,
-} from "#db/queries/orders_products";
+/** Creates an order for a user and returns it. */
+export async function createOrder(date, note, userId) {
+  const sql = `
+    INSERT INTO orders (date, note, user_id)
+    VALUES ($1, $2, $3)
+    RETURNING *
+  `;
+  const {
+    rows: [order],
+  } = await db.query(sql, [date, note, userId]);
+  return order;
+}
 
-router.use(requireUser);
+/** Returns all orders made by a given user. */
+export async function getOrdersByUserId(userId) {
+  const sql = `
+    SELECT *
+    FROM orders
+    WHERE user_id = $1
+    ORDER BY id
+  `;
+  const { rows } = await db.query(sql, [userId]);
+  return rows;
+}
 
-router.post("/", requireBody(["date"]), async (req, res) => {
-  const { date, note } = req.body;
-  const order = await createOrder(date, note ?? null, req.user.id);
-  res.status(201).send(order);
-});
+/** Returns a single order by id, or undefined if it does not exist. */
+export async function getOrderById(id) {
+  if (!Number.isInteger(Number(id))) return undefined;
+  const sql = `
+    SELECT *
+    FROM orders
+    WHERE id = $1
+  `;
+  const {
+    rows: [order],
+  } = await db.query(sql, [id]);
+  return order;
+}
 
-router.get("/", async (req, res) => {
-  const orders = await getOrdersByUserId(req.user.id);
-  res.send(orders);
-});
-
-router.param("id", async (req, res, next, id) => {
-  const order = await getOrderById(id);
-  if (!order) return res.status(404).send("Order not found.");
-  if (order.user_id !== req.user.id) {
-    return res.status(403).send("Forbidden.");
-  }
-  req.order = order;
-  next();
-});
-
-router.get("/:id", (req, res) => {
-  res.send(req.order);
-});
-
-router.post(
-  "/:id/products",
-  requireBody(["productId", "quantity"]),
-  async (req, res) => {
-    const { productId, quantity } = req.body;
-    const product = await getProductById(productId);
-    if (!product) return res.status(400).send("Product does not exist.");
-    const orderProduct = await addProductToOrder(req.order.id, productId, quantity);
-    res.status(201).send(orderProduct);
-  }
-);
-
-router.get("/:id/products", async (req, res) => {
-  const products = await getProductsByOrderId(req.order.id);
-  res.send(products);
-});
+/**
+ * Returns all orders made by a user that include a given product.
+ */
+export async function getOrdersByUserIdAndProductId(userId, productId) {
+  const sql = `
+    SELECT o.*
+    FROM orders o
+    JOIN orders_products op ON op.order_id = o.id
+    WHERE o.user_id = $1 AND op.product_id = $2
+    ORDER BY o.id
+  `;
+  const { rows } = await db.query(sql, [userId, productId]);
+  return rows;
+}

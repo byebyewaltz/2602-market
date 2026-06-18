@@ -1,0 +1,7 @@
+[
+  { "title": "Coffee Mug", "description": "Ceramic mug that holds 12oz of your favorite drink.", "price": 12.99 },
+  { "title": "Notebook", "description": "A5 dotted notebook with 192 pages.", "price": 8.5 },
+  { "title": "Mechanical Keyboard", "description": "Hot-swappable 65% keyboard with brown switches.", "price": 89.0 },
+  { "title": "Desk Lamp", "description": "Adjustable LED lamp with three brightness levels.", "price": 34.95 },
+  { "title": "Water Bottle", "description": "Insulated stainless steel bottle, 24oz.", "price": 21.0 },
+  { "title": "Backpack", "description": "Weatherproof backpack with a laptop sleeve.", "price": 59.99 },
