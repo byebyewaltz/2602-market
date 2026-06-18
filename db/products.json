@@ -5,3 +5,10 @@
   { "title": "Desk Lamp", "description": "Adjustable LED lamp with three brightness levels.", "price": 34.95 },
   { "title": "Water Bottle", "description": "Insulated stainless steel bottle, 24oz.", "price": 21.0 },
   { "title": "Backpack", "description": "Weatherproof backpack with a laptop sleeve.", "price": 59.99 },
+  { "title": "Wireless Mouse", "description": "Ergonomic wireless mouse with silent clicks.", "price": 27.5 },
+  { "title": "Headphones", "description": "Over-ear noise-cancelling headphones.", "price": 149.99 },
+  { "title": "Plant Pot", "description": "Terracotta pot with a drainage tray.", "price": 14.25 },
+  { "title": "Sticky Notes", "description": "Pack of 12 colorful sticky note pads.", "price": 6.75 },
+  { "title": "Phone Stand", "description": "Aluminum adjustable phone stand.", "price": 16.0 },
+  { "title": "Travel Tumbler", "description": "Leak-proof tumbler for hot and cold drinks.", "price": 19.5 }
+]
